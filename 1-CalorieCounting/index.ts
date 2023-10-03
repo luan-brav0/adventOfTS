@@ -2246,4 +2246,18 @@ const sumList: int[] = inputList.map((elfItems) =>
 );
 console.log(sumList);
 
-console.log(Math.max(...sumList));
+let podium: int[] = [];
+
+let biggest: int = Math.max(...sumList);
+console.log("Biggest: ", biggest);
+podium.push(biggest);
+sumList.splice(sumList.indexOf(biggest), 1);
+let secondBiggest: int = Math.max(...sumList);
+console.log("Second biggest: ", secondBiggest);
+podium.push(secondBiggest);
+sumList.splice(sumList.indexOf(secondBiggest), 1);
+let thirdBiggest: int = Math.max(...sumList);
+console.log("Third biggest: ", thirdBiggest);
+podium.push(thirdBiggest);
+sumList.splice(sumList.indexOf(secondBiggest), 1);
+console.log('Podium Total cals: ', podium.reduce((sum, item) => sum + item, 0));
