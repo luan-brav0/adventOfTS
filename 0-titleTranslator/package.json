@@ -1,0 +1,15 @@
+{
+  "name": "0-titletranslator",
+  "module": "titleTranslator.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.5.1",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
