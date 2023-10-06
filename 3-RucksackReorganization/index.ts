@@ -299,19 +299,31 @@ FFsVtFGVGvWVhlfVhzlsFvHbPwPmwHLTSbLjcLtbSbLm
 rZrpJwCqnnJHmqcbcTLTbS
 RCZZQMQpzvRhswVg`;
 
-// PART 2
+//part 2 vars
 const rucksacks: string[] = INPUT.split("\n");
 
+let elfGroups: string[][] = [];
+for (let rucksack = 0; rucksack < rucksacks.length; rucksack += 3) {
+  elfGroups.push(rucksacks.slice(rucksack, rucksack + 3));
+}
+console.log("elf groups update:", elfGroups);
+
+// part 2
 const findBadges = (elfGroups: string[][]): string[] => {
-  return elfGroups.map((group: string[]): string[] => {
-    return group[0].filter((item) => {
-      return group[1].includes(item) && group[2].includes(item);
-    });
+  return elfGroups.map((group) => {
+    for (let char of group[0]) {
+      if (group[1].includes(char) && group[2].includes(char)) {
+        return char;
+      }
+    }
   });
 };
 
+const badges: string[] = findBadges(elfGroups);
+console.log(badges);
+
 // Used in part 1 also
-const getCharPriorities = (chars: string[]): int[] => {
+const getCharPriorities = (chars: string[]): number[] => {
   return chars.map((char) => {
     if (char.charCodeAt(0) >= 97) {
       return char.charCodeAt(0) - 96;
@@ -321,22 +333,15 @@ const getCharPriorities = (chars: string[]): int[] => {
   });
 };
 
-// part 2 main logic loop
-const main = (rucksacks: string[]) => {
-  for (let rucksack: int; rucksack >= rucksacks.length - 1; rucksack += 3) {
-    const elfGroups: string[][] = rucksacks.slice(rucksack, rucksack + 3);
-    console.log(elfGroups);
-    const badges: string[] = findBadges(elfGroups);
-    console.log(badges);
-    const priorities: int[] = getCharPriorities(badges);
-    console.log(priorities);
-    const prioritySum: int = priorities.reduce((a, b) => a + b, 0);
-    console.log(prioritySum);
-  }
-};
-main(rucksacks);
+const priorities: number[] = getCharPriorities(badges);
+console.log(priorities);
+
+const prioritySum: number = priorities.reduce((a, b) => a + b, 0);
+console.log(prioritySum);
+
 // PART 1 CODE - 8085
-/* const comparts: string[][] = INPUT.split("\n").map((elfItems) => [
+/*
+const comparts: string[][] = INPUT.split("\n").map((elfItems) => [
   elfItems.slice(0, elfItems.length / 2),
   elfItems.slice(elfItems.length / 2, elfItems.length),
 ]);
